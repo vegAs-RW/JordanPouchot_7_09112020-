@@ -1,13 +1,15 @@
-const mysql = require("mysql")
 require("dotenv").config();
 
-const db = mysql.createConnection({
-    host     : 'localhost',
-    user     : `${process.env.USER_DB}`,
-    password : `${process.env.PASS_DB}`,
-    database : `${process.env.DB_NAME}`
-  });
-  
- module.exports.getDB = () => {
-     return db
- }
+module.exports = {
+    HOST: process.env.DB_HOST,
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
+    DB: process.env.DB_NAME,
+    dialect: "mysql",
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
+};
