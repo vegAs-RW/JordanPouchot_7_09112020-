@@ -1,47 +1,29 @@
-module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("User", {
-      id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          allowNull: false,
-          primaryKey: true,
-      },
-
-      firstName: {
-          type: Sequelize.STRING(40),
-          allowNull: false,
-      },
-
-      lastName: {
-          type: Sequelize.STRING(40),
-          allowNull: false,
-      },
-
-      username: {
-          type: Sequelize.STRING(20),
-          allowNull: false,
-      },
-
-      email: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          unique: true,
-          validate: {
-              is: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/ 
-          },
-      },
-
-      password: {
-          type: Sequelize.STRING,
-          allowNull: false,
-      },
-
-      isAdmin: {
-          type: Sequelize.BOOLEAN,
-          allowNull: false,
-          default: false,
-      },
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      models.User.hasMany(models.Post)
+      models.User.hasMany(models.Comment)
+      models.User.hasMany(models.Like)
+    }
+  };
+  User.init({
+    email: DataTypes.STRING,
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN
+  }, {
+    sequelize,
+    modelName: 'User',
   });
-
   return User;
 };
