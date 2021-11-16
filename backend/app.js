@@ -4,6 +4,8 @@ const helmet = require("helmet");
 const app = express();
 const path = require ('path')
 
+const userRoutes = require ('./routes/user.routes')
+
 // Modifications des Headers pour les Cors
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,14 +13,12 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
-  
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.json());
 app.use(helmet());
 
-app.use((req, res) => {
-   res.json({ message: 'Votre requête a bien été reçue !' }); 
-});
+app.use('api/user/', userRoutes);
 
 
 module.exports = app;
