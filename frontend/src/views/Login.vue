@@ -13,11 +13,17 @@
     <div class="form-row">  
       <input v-model="password" class="form-row__input" type="password" placeholder="Password">
     </div>
+    <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+      Adresse mail et/ou mot de passe invalide
+    </div>
+    <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
+      Adresse mail déjà utilisée
+    </div>
     <div class="form-row">
-      <button class="button button--disabled" v-if="mode == 'login'">
+      <button @click="login" class="button" :class="{'button--disabled' : !validatedFields}" v-if="mode == 'login'">
         Connexion
       </button>
-      <button @click="createAccount" class="button" :class="{'button--disabled' : !validatedFields}" v-else>
+      <button @click="register" class="button" :class="{'button--disabled' : !validatedFields}" v-else>
         Créer mon compte
       </button>
     </div>
@@ -25,6 +31,9 @@
 </template>
 
 <script>
+
+import {mapState} from 'vuex'
+
 export default{
   name: 'Login',
   data: function() {
@@ -51,6 +60,7 @@ export default{
          }
        }
     },
+    ...mapState (['status'])
 
   },
   methods: {
@@ -60,8 +70,38 @@ export default{
     switchToLogin: function() {
       this.mode = 'login';
     },
-    createAccount: function() {
-      console.log(this.email, this.username, this.password);
+    login: function() {
+      const self = this;
+      this.$store.dispatch('login', {
+        isLogged: true,
+        email: this.email,
+        username: this.username,
+        password: this.password
+      }) 
+      .then(function () {
+       
+        self.$router.push('/home');
+      },
+      function (error) {
+        console.log(error);
+      })
+      
+    },
+
+    register: function() {
+      const self = this;
+      this.$store.dispatch('register', {
+        email: this.email,
+        username: this.username,
+        password: this.password
+      }) 
+      .then(function () {
+        self.login();
+      },
+      function (error) {
+        console.log(error);
+      })
+      
     },
   }
 }
