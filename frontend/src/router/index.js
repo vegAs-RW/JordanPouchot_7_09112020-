@@ -1,33 +1,42 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../views/Login.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Profil from '../views/Profil.vue'
+//import auth from '../middleware/auth'
+//import VueRouteMiddleware from 'vue-route-middleware'
+
 const routes = [
   {
     path: '/',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/home',
     name: 'Home',
     component: Home
   },
-  /*{
-    path: '/profil',
-    name: 'Profil',
-    component: Profil
-  },*/
   {
-    path: '/profil/:userId',
-    name: 'UserProfil',
-    component: Profil
+    path: '/signup',
+    name: 'Signup',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue')
   },
+  {
+    path: '/post',
+    name: 'Post',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Post.vue'),
+    /*meta: {
+      middleware: auth
+    }*/
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue'),
+    /*meta: {
+      middleware: auth
+    }*/
+  }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 })
+
+//router.beforeEach(VueRouteMiddleware())
 
 export default router

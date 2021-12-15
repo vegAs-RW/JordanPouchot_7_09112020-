@@ -1,15 +1,20 @@
 <template>
     <div class="home">
         <div class="home__title">
-        <img class="home__title__logo" src="../assets/icon-left-font.png" alt="Logo de Groupomania">
+            <img class="home__title__logo" src="../assets/icon-left-font.png" alt="Logo de Groupomania">
         </div>
         <div class="home__display">
             <!--<div class="home__display__picture">
-                <img class="home__display__picture" src="../assets/icon-left-font.png" alt="">
+                <img class="home__display__picture" src="../assets/icon-left-font.png" alt="Représentation de trois personnes qui discutent via un chat">
             </div>-->
+           
+            <form @submit.prevent="signup" class="home__display__form">
+                <h1 class="home__display__form__title">S'inscrire</h1>
 
-            <form @submit.prevent="login" class="home__display__form">
-                <h1 class="home__display__form__title">Connexion</h1>
+                <div class="home__display__form__input">
+                    <label for="username" class="home__display__form__input__label">Pseudo</label>
+                    <input type="text" v-model="username" id="username" name="username">
+                </div>
 
                 <div class="home__display__form__input">
                     <label for="mail" class="home__display__form__input__label">Email</label>
@@ -21,11 +26,11 @@
                     <input type="password" v-model="password" id="password" name="password">
                 </div>
 
-                <button class="home__display__form__button">Connexion</button>
+                <button class="home__display__form__button">Inscription</button>
 
-                <p>Vous n'avez pas encore de compte ? <router-link to="/signup" class="home__display__form__signup">S'inscrire</router-link></p>
+                <p>Vous avez déjà un compte ? <router-link to="/" class="home__display__form__login">Se connecter</router-link></p>
             </form>
-        </div> 
+        </div>
     </div>
 </template>
 
@@ -35,42 +40,40 @@
     import { Notyf } from 'notyf'
     import 'notyf/notyf.min.css'
     export default {
-        name: 'Home',
+        name: 'Signup',
         data() {
             return {
+                username: '',
                 email: '',
                 password: '',
             }
         },
         created() {
             this.notyf = new Notyf({
-                duration: 2000,
+                duration: 4000,
                 position: {
                     x: 'center',
                     y: 'bottom'
                 }
             });
-        }, 
+        },
         methods: {
-            // Permet de se connecter et de recharger la page sans que l'utilisateur soit déconnecté
-            login() {
-                axios.post('http://localhost:3000/api/user/login', {
+            // Permet de s'inscrire et de basculer sur la page de connexion 
+            signup() {
+                axios.post('http://localhost:3000/api/user/signup', {
+                    username: this.username,
                     email: this.email,
                     password: this.password,
                 })
-                .then(response => {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('userId', response.data.userId);
-                    localStorage.setItem('username', response.data.username);
-                    localStorage.setItem('isAdmin', response.data.isAdmin);
-                    localStorage.setItem('imageProfile', response.data.imageProfile);
-                    this.$router.push('post');
+                .then(() => {
+                    this.notyf.success('Votre compte a bien été créé ! A présent, veuillez vous connecter.')
+                    this.$router.push('/');
                 })
                 .catch(error => {
                     const msgerror = error.response.data
                     this.notyf.error(msgerror.error)
                 })
-            }
+            },
         }
     }
 </script>
@@ -189,5 +192,11 @@
         border: none;
         background-color:#f2f2f2 ;
     }
-    
+    #username {
+        padding: .5rem;
+        border-radius: .5rem;
+        border: none;
+        background-color:#f2f2f2 ;
+    }
 </style>
+    
