@@ -4,10 +4,6 @@ const db = require('../models/');
 const fs = require('fs');
 
 
-/*const Post = db.posts;
-const User = db.users;
-const Comment = db.comments;*/
-
 // Permet de créer un nouveau message
 exports.createPost = (req, res, next) => {   
     const content = req.body.content;
@@ -119,6 +115,17 @@ exports.deletePost = (req, res, next) => {
             if(post.imagePost != null) {
                 const filename = post.imagePost.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
+                    db.Comment.findAll({
+                        where: { PostId : req.params.postId} 
+                     })
+                     .then(() => {
+                        db.Comment.destroy({
+                            where: { PostId : req.params.postId} 
+                         })
+                     })
+                     db.Like.destroy({
+                        where: { PostId: req.params.postId}
+                    })
                     db.Post.destroy({ 
                         where: { id: req.params.postId } 
                     })
@@ -126,6 +133,12 @@ exports.deletePost = (req, res, next) => {
                     .catch(() => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
                 })
             } else {
+                db.Comment.destroy({
+                    where: { PostId : req.params.postId} 
+                 })
+                 db.Like.destroy({
+                    where: { PostId: req.params.postId}
+                })
                 db.Post.destroy({ 
                     where: { id: req.params.postId } 
                 })
@@ -136,5 +149,16 @@ exports.deletePost = (req, res, next) => {
             return res.status(404).json({ error: 'Message non trouvé'})
         }
     })
+    
     .catch(error => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
 }
+
+/*.then(() => {
+    db.Comment.destroy({
+       where: { id : req.params.postId} 
+    })
+    db.Like.destroy({
+        where: { id: req.params.postId}
+    })
+})*/
+
