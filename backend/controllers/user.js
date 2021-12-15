@@ -19,6 +19,7 @@ exports.signup = (req, res, next) => {
     var username = req.body.username;
     var email    = req.body.email;
     var password = req.body.password;
+    var isAdmin = req.body.isAdmin
 
     // Permet de vérifier que tous les champs sont complétés
     if(email == null || email == '' || username == null || username == ''|| password == null || password == '') {
@@ -56,7 +57,7 @@ exports.signup = (req, res, next) => {
                     username: req.body.username,
                     email: req.body.email,
                     password: hash,
-                    isAdmin: 0
+                    isAdmin: req.body.isAdmin || 0
                 });
                 user.save()
                     .then(() => res.status(201).json({ message: 'Votre compte a bien été créé !' }))
@@ -172,6 +173,15 @@ exports.deleteAccount = (req, res, next) => {
                 const filename = user.imageProfile.split('/images/')[1];
                 console.log(user.imageProfile);
                 fs.unlink(`images/${filename}`, () => {
+                    /*db.User.destroy({ 
+                        where: { id: id } 
+                    })*/
+                    db.Post.destroy ({
+                        where : { userId : user.dataValues.id }
+                    })
+                    db.Comment.destroy ({
+                        where: {userId: user.dataValues.id}
+                    })
                     db.User.destroy({ 
                         where: { id: id } 
                     })
@@ -179,6 +189,15 @@ exports.deleteAccount = (req, res, next) => {
                     .catch(() => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
                 })
             } else {
+                /*db.User.destroy({ 
+                    where: { id: id } 
+                })*/
+                db.Post.destroy ({
+                    where : { userId : user.dataValues.id }
+                })
+                db.Comment.destroy ({
+                    where: {userId: user.dataValues.id}
+                })
                 db.User.destroy({ 
                     where: { id: id } 
                 })
