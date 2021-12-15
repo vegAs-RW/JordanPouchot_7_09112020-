@@ -1,39 +1,26 @@
-/*'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, Sequelize) => {
+'use strict';
+
+const { Model } = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
-   
     static associate(models) {
-      // define association here
-      models.Post.belongsTo(models.User,{
-        foreignKey: {
-          allowNul: false 
-        }
+      models.Post.belongsTo(models.User, {
+        foreignKey: 'userId'
       })
-      models.Post.hasMany(models.Like)
+      models.Post.hasMany(models.Like);
+      models.Post.hasMany(models.Comment);
     }
   };
   Post.init({
-    iduser: Sequelize.INTEGER,
-    content: Sequelize.STRING,
-    date: Sequelize.DATE,
-    attachment: Sequelize.STRING
+    userId: DataTypes.INTEGER,
+    content: DataTypes.STRING,
+    imagePost: DataTypes.STRING,
+    likes: DataTypes.INTEGER
+
   }, {
     sequelize,
     modelName: 'Post',
   });
   return Post;
-};*/
-
-module.exports = (sequelize, Sequelize) => {
-  const Post = sequelize.define('Post', {
-      userId: Sequelize.BIGINT,
-      title: Sequelize.STRING,
-      username: Sequelize.STRING,
-      imgURL: Sequelize.STRING,
-    })
-
-  return Post
 };
