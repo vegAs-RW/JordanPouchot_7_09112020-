@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Posts', {
@@ -8,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      iduser: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
@@ -20,9 +21,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      attachment: {
-        allowNull: true,
+      imagePost: {
         type: Sequelize.STRING
+      },
+      likes: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
