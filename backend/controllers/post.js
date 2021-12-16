@@ -115,18 +115,21 @@ exports.deletePost = (req, res, next) => {
             if(post.imagePost != null) {
                 const filename = post.imagePost.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
+                    // On recupere les commentaires lié au post
                     db.Comment.findAll({
                         where: { PostId : req.params.postId} 
                      })
                      .then(() => {
+                         // On supprime les likes lié au post
                         db.Like.destroy({
                             where: { PostId: req.params.postId}
                         })
+                        // On supprime les commentaires lié au post
                         db.Comment.destroy({
                             where: { PostId : req.params.postId} 
                          })
                      })
-                     
+                    // Et enfin on supprime le post
                     db.Post.destroy({ 
                         where: { id: req.params.postId } 
                     })
@@ -154,12 +157,5 @@ exports.deletePost = (req, res, next) => {
     .catch(error => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
 }
 
-/*.then(() => {
-    db.Comment.destroy({
-       where: { id : req.params.postId} 
-    })
-    db.Like.destroy({
-        where: { id: req.params.postId}
-    })
-})*/
+
 

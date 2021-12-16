@@ -131,8 +131,6 @@ exports.modifyUserProfile = (req, res, next) => {
 
     req.body.user = userId
     
-    
-    console.log('bodyUser', req.body.user);
     const userObject = req.file ?
     {
     ...JSON.parse(req.body.user),
@@ -165,23 +163,24 @@ exports.deleteAccount = (req, res, next) => {
         where: { id: id }
     })
     .then(user => {
-        
+        // On recupere les posts du user a delete, et on push les ids dans un tableau
         db.Post.findAll ({where: {userId: id}}) 
         .then((result) => {
             let postsId = [];
             for (let i = 0; i < result.length; i++) {
                 postsId.push(result[i].id)
-                console.log(postsId);
             }
-           
+           // On supprime les likes lié au user et aux posts du user
             db.Like.destroy ({
                 where: {[Op.or]: [{ PostId: postsId }, {userId: id}]}
             })
+            // On supprime les commentaires lié au user et aux posts du user
             db.Comment.destroy({
                     where: { [Op.or]: [{ PostId: postsId }, {userId: id}] }
                   })
-             db.Post.destroy({ where: { userId: id } })
-            
+            // On supprime les posts du user      
+            db.Post.destroy({ where: { userId: id } })
+            // Et enfin on supprime le user
             db.User.destroy({ where: { id: id } })
             .then(() => {
                 res.status(200).json({ message: 'User deleted' })
