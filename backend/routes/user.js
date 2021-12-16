@@ -17,7 +17,7 @@ router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/:id', auth, userCtrl.getUserProfile);
 router.put('/:id', auth, multer, userCtrl.modifyUserProfile);
-router.delete('/:id', userCtrl.deleteAccount);
+router.delete('/:id', auth, userCtrl.deleteAccount);
 
 
 // Permet d'exporter le router
