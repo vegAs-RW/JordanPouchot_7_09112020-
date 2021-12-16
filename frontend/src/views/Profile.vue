@@ -128,7 +128,7 @@
 		min-width: 40%;
 		max-width: 60%;
 		margin: 3rem auto;
-		background: #ffb1b1;
+		background: #fcbcaca4;
 		border-radius: 25px;
 		@media (max-width: 500px) {
 			min-width: 80%;
@@ -147,7 +147,7 @@
 			}
 			&__modify__btnInvisible {
 			border: none;
-			background-color: #ffb1b1;
+			background-color: #fcbcaca4;
 			color: #3f3d56;
 				&:hover, &:focus {
 					color: white;
@@ -172,32 +172,33 @@
 			}
 		}
 		&__smallButton {
-			border: 2px solid #3f3d56;
+			border: none;
 			border-radius: 25px;
-			color: #3f3d56;
+			color: #fc7c64;
 			font-size: 15px;
 			font-weight: bold;
 			padding: 0.4rem;
 			margin: 1rem;
 			outline-style: none;
-			background: white;
+			background: #fcb49d;
 			&:hover, &:focus {
 			color: #ff6363;
 			cursor: pointer;
 			}
 		}
 		&__bigButton {
-			border: 3px solid #3f3d56;
+			border: none;
+			background-color: #fc3914;
 			border-radius: 25px;
-			color: #3f3d56;
+			color: #FFFF;
 			font-size: 15px;
 			font-weight: bold;
 			padding: 0.9rem;
 			margin: 1rem;
 			outline-style: none;
 			&:hover, &:focus {
-			border: 3px solid #ff6363;
-			color: #ff6363;
+			border: 3px solid #fc3914;
+			color: #FFFF;
 			cursor: pointer;
 			}
 		}

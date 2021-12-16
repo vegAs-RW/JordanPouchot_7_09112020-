@@ -4,7 +4,7 @@
         
         <div class="modaleBloc__card">
             <div class="modaleBloc__card__title">
-                <h2>Etes-vous sûr de vouloir supprimer votre compte ?</h2>
+                <h2>Voulez-vous vraiment supprimer votre compte ?</h2>
                 <p>(Cette action est irréversible)</p>
                 <div class="modaleBloc__card__title__close">
                     <i @click="displayModale" class="far fa-times-circle fa-2x modaleBloc__card__title__close"></i>
@@ -79,7 +79,8 @@
         &__card {
             z-index: 2;
             position: fixed;
-            background: #f1f1f1;
+            border-radius: 25px;
+            background: #fcb49d;
             color: #3f3d56;
             &__title {
                 display: flex;
@@ -98,12 +99,12 @@
                     right: 1rem;
                     color: #3f3d56;
                     &:hover, &:focus {
-                        color: #ff6363;
+                        color: #fc3914;
                     }
                 }
             }
             &__button {
-                border: 3px solid #3f3d56;
+                border: none;
                 border-radius: 25px;
                 color: #3f3d56;
                 font-size: 15px;
@@ -112,8 +113,8 @@
                 margin: 1rem 0 2rem 0;
                 outline-style: none;
                 &:hover, &:focus {
-                    border: 3px solid #ff6363;
-                    color: #ff6363;
+                    border: 3px solid #fc3914;
+                    color: #fc3914;
                 }
             }
         }       

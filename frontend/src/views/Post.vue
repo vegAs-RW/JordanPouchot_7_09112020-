@@ -380,7 +380,7 @@
         display: none;
     }
     .newPost {
-        background: #ffb1b1;
+        background: #fcbcaca4;
         border-radius: 25px;
         margin: auto;
         margin-top: 2rem;
@@ -427,25 +427,26 @@
                 &__btnInvisible {
                     display: flex;
                     align-items: center;
-                    color: #3f3d56;
+                    color: #fc7c64;
                     border: none;
-                    background-color: #ffb1b1;
+                    background-color: #fcb49d;
                     &:hover, &:focus {
                         color: white;
                     }
                 }
             }
             &__button {
-                border: 2px solid #3f3d56;
+                background-color: #fcb49d;
+                border: none;
                 border-radius: 25px;
-                color: #3f3d56;
+                color: /*#3f3d56*/ #fc7c64;
                 font-size: 15px;
                 font-weight: bold;
                 padding: 0.4rem;
                 margin: 1rem;
-                outline-style: none;
+                //outline-style: none;
                 &:hover, &:focus {
-                    color: #ff6363;
+                    color: #FFFF;
                 }
             }
             
@@ -457,7 +458,7 @@
         &__item {
             display: flex;
             flex-direction: column;
-            border: 2px solid #ff6363;
+            border: 2px solid #fcbcac;
             border-radius: 25px;
             margin: auto;
             margin-top: 2rem;
@@ -491,6 +492,8 @@
                     margin: 0.5rem 0.5rem 0 0;
                     }
                     &__name {
+                        color: #fc8c74;
+                        font-weight: bold;
                         margin-bottom: 0.2rem;
                         font-size: 22px;
                         @media (max-width: 767px) {
@@ -499,6 +502,7 @@
                     }
                 }
                 &__date {
+                    font-style: italic;
                     display: flex;
                     justify-content: flex-end;
                     @media (max-width: 767px) {
@@ -547,7 +551,7 @@
                                 display: flex;
                                 align-items: center;
                                 font-size: 14px;
-                                color: #3f3d56;
+                                color: #fcbcaca4;
                                 border: none;
                                 background-color: white;
                                 &:hover, &:focus {
@@ -583,7 +587,7 @@
                 display: flex;
                 justify-content: space-around;
                 &__button:hover, &__button:focus {
-                    color: #ff6363;
+                    color: #fc7c64;
                     cursor: pointer;
                 }
                 &__count {
@@ -598,7 +602,7 @@
         &__item {
             display: flex;
             flex-direction: column;
-            border: 2px solid #ff6363;
+            border: 2px solid #fcbcac;
             border-radius: 25px;
             margin: auto;
             margin-top: 0.5rem;
@@ -627,6 +631,8 @@
                     margin: 0 0.5rem 0 0;
                     }
                     &__name {
+                        color: #fc8c74;
+                        font-weight: bold;
                         margin-top: 0.5rem;
                         margin-bottom: 0;
                         font-size: 18px;
@@ -635,7 +641,7 @@
             }
         }
         &__newComment {
-            background: #ffb1b1;
+            background: #fcbcaca4;
             border-radius: 25px;
             margin: auto;
             margin-top: 0.5rem;
@@ -667,9 +673,10 @@
                     min-height: 3rem;
                 }
                 &__button {
-                    border: 2px solid #3f3d56;
+                    background-color: #fcb49d;
+                    border: none;
                     border-radius: 25px;
-                    color: #3f3d56;
+                    color: #fc7c64;
                     font-size: 15px;
                     font-weight: bold;
                     padding: 0.4rem;

@@ -1,7 +1,7 @@
 <template>  
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light nav">
-            <img class="nav__logo" src="" alt="Logo de Groupomania">
+            <img class="nav__logo" src="../assets/icon-left-font.png" alt="Logo de Groupomania">
 
             <button class="navbar-toggler justify-content-center nav__menuButton" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
@@ -60,8 +60,9 @@
         &__logo {
             display: flex;
             justify-content: flex-start;
-            max-width: 450px;
+            max-width: 150px;
             width: 52%;
+            height: 150px;
         }
         &__menuButton:hover, &__menuButton:focus {
             color: #ff6363;
@@ -69,9 +70,6 @@
         a, button {
             font-weight: bold;
             color: #3f3d56;
-            // &.router-link-exact-active {
-            // color: #ff6363;
-            // }
             &:hover, &:focus  {
                 color: #ff6363;
             }

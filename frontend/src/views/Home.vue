@@ -4,9 +4,6 @@
         <img class="home__title__logo" src="../assets/icon-left-font.png" alt="Logo de Groupomania">
         </div>
         <div class="home__display">
-            <!--<div class="home__display__picture">
-                <img class="home__display__picture" src="../assets/icon-left-font.png" alt="">
-            </div>-->
 
             <form @submit.prevent="login" class="home__display__form">
                 <h1 class="home__display__form__title">Connexion</h1>
