@@ -3,11 +3,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fs = require('fs')
 
-const postCtrl = require ('../controllers/post')
+
 require('dotenv').config({path: './config/.env'});
 
 const db = require('../models/index');
-
+const Op = db.Sequelize.Op;
 
 // Regex de validation
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -162,52 +162,32 @@ exports.modifyUserProfile = (req, res, next) => {
 exports.deleteAccount = (req, res, next) => {
     const id = req.params.id;
     db.User.findOne({
-        //attributes: ['id'],
         where: { id: id }
     })
-    
     .then(user => {
-        if(user) {
-            console.log(user);
-            if(user.imageProfile != null) {
-                const filename = user.imageProfile.split('/images/')[1];
-                console.log(user.imageProfile);
-                fs.unlink(`images/${filename}`, () => {
-                    /*db.User.destroy({ 
-                        where: { id: id } 
-                    })*/
-                    db.Post.destroy ({
-                        where : { userId : user.dataValues.id }
-                    })
-                    db.Comment.destroy ({
-                        where: {userId: user.dataValues.id}
-                    })
-                    db.User.destroy({ 
-                        where: { id: id } 
-                    })
-                    .then(() => res.status(200).json({ message: 'Votre message a été supprimé' }))
-                    .catch(() => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
-                })
-            } else {
-                /*db.User.destroy({ 
-                    where: { id: id } 
-                })*/
-                db.Post.destroy ({
-                    where : { userId : user.dataValues.id }
-                })
-                db.Comment.destroy ({
-                    where: {userId: user.dataValues.id}
-                })
-                db.User.destroy({ 
-                    where: { id: id } 
-                })
-                .then(() => res.status(200).json({ message: 'Votre message a été supprimé' }))
-                .catch(() => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
+        
+        db.Post.findAll ({where: {userId: id}}) 
+        .then((result) => {
+            let postsId = [];
+            for (let i = 0; i < result.length; i++) {
+                postsId.push(result[i].id)
+                console.log(postsId);
             }
-        } else {
-            return res.status(404).json({ error: 'Utilisateur non trouvé' })
-        }
+           
+            db.Like.destroy ({
+                where: {[Op.or]: [{ PostId: postsId }, {userId: id}]}
+            })
+            db.Comment.destroy({
+                    where: { [Op.or]: [{ PostId: postsId }, {userId: id}] }
+                  })
+             db.Post.destroy({ where: { userId: id } })
+            
+            db.User.destroy({ where: { id: id } })
+            .then(() => {
+                res.status(200).json({ message: 'User deleted' })
+              })     
+        })  
+        .catch(error => res.status(401).json({ error }));          
     })
-
-    .catch(error => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
+    .catch(error => res.status(500).json({ error }));
 }

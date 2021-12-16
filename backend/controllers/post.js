@@ -111,7 +111,7 @@ exports.deletePost = (req, res, next) => {
     })
     .then(post => {
         if(post) {
-            console.log(post);
+            
             if(post.imagePost != null) {
                 const filename = post.imagePost.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
@@ -119,13 +119,14 @@ exports.deletePost = (req, res, next) => {
                         where: { PostId : req.params.postId} 
                      })
                      .then(() => {
+                        db.Like.destroy({
+                            where: { PostId: req.params.postId}
+                        })
                         db.Comment.destroy({
                             where: { PostId : req.params.postId} 
                          })
                      })
-                     db.Like.destroy({
-                        where: { PostId: req.params.postId}
-                    })
+                     
                     db.Post.destroy({ 
                         where: { id: req.params.postId } 
                     })
