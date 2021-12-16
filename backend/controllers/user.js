@@ -170,6 +170,8 @@ exports.deleteAccount = (req, res, next) => {
             for (let i = 0; i < result.length; i++) {
                 postsId.push(result[i].id)
             }
+            const filename = user.imageProfile.split('/images/')[1];
+                fs.unlink(`images/${filename}`, () => {
            // On supprime les likes lié au user et aux posts du user
             db.Like.destroy ({
                 where: {[Op.or]: [{ PostId: postsId }, {userId: id}]}
@@ -187,6 +189,6 @@ exports.deleteAccount = (req, res, next) => {
               })     
         })  
         .catch(error => res.status(401).json({ error }));          
-    })
+    })})
     .catch(error => res.status(500).json({ error }));
 }

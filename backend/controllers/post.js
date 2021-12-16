@@ -110,8 +110,7 @@ exports.deletePost = (req, res, next) => {
         where: { id: req.params.postId }
     })
     .then(post => {
-        if(post) {
-            
+        if(post) { 
             if(post.imagePost != null) {
                 const filename = post.imagePost.split('/images/')[1];
                 fs.unlink(`images/${filename}`, () => {
