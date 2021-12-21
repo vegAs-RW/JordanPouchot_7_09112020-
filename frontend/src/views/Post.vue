@@ -444,7 +444,6 @@
                 font-weight: bold;
                 padding: 0.4rem;
                 margin: 1rem;
-                //outline-style: none;
                 &:hover, &:focus {
                     color: #FFFF;
                 }
@@ -551,17 +550,18 @@
                                 display: flex;
                                 align-items: center;
                                 font-size: 14px;
-                                color: #fcbcaca4;
+                                color: #fc7c64;
                                 border: none;
                                 background-color: white;
                                 &:hover, &:focus {
-                                    color: #ff6363;
+                                    color: #fc7c64;
                                 }
                             }
                             &__button {
-                                border: 2px solid #3f3d56;
+                                border: none;
                                 border-radius: 25px;
-                                color: #3f3d56;
+                                color: #fc7c64;
+                                background-color: #fcb49d;
                                 font-size: 14px;
                                 font-weight: bold;
                                 padding: 0.4rem;
@@ -569,7 +569,7 @@
                                 outline-style: none;
                                 margin-left: 1rem;
                                 &:hover, &:focus {
-                                    color: #ff6363;
+                                    color: #FFFF;
                                 }
                             }
                         }

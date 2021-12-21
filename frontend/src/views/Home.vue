@@ -77,13 +77,11 @@
     .home {
         &__title {
             background: #FFFF;
-            @media (max-width: 930px) {
-                width: 100vw;
-                justify-content: center;
-                display: flex;
-                height: 150px;
-                border-bottom: 2px solid #E60A0A;
-            }
+            width: 100vw;
+            justify-content: center;
+            display: flex;
+            height: 150px;
+            border-bottom: 2px solid #E60A0A;
              &__logo {
                 width: 10rem;
         }
@@ -91,25 +89,8 @@
         &__display {
             background-color: #fcf3f1; 
             display: flex;
-            height: 100vw;
             justify-content: space-around;
-            @media (max-width: 930px) {
-                display: flex;
-                flex-direction: column-reverse;
-            }
-            /*&__picture {
-                float: left;
-                padding-top: 4rem;
-                margin: 0 0 0 3rem;
-                @media (max-width: 1170px) {
-                    max-width: 350px;
-                }
-                @media (max-width: 930px) {
-                    max-width: 250px;
-                    margin: auto;
-                    padding-top: 2rem;
-                } 
-            }*/
+            height: auto;
             &__form {
                 background-color: #FFFF;
                 display: flex;
@@ -119,15 +100,12 @@
                 width: 70%;
                 border: 1px solid #fc3914;
                 border-radius: 25px;
-                margin: 2rem auto;
-                
+                margin: 3rem auto ;
+                max-height: 500px;
                 padding: 2rem 0 0 0;
-                /*@media (max-width: 930px) {
-                    min-width: 250px;
-                    //margin: auto;
-                }*/
                 p {
                     text-align: center;
+                    margin: 0 0 1rem 0;
                 }
                 &__title {
                     margin-bottom: 1.5rem;
@@ -166,8 +144,7 @@
                 &__signup {
                     font-weight: bold;
                     text-decoration: underline;
-                    color: #E60A0A;
-                    
+                    color: #E60A0A; 
                 }
             }
         }
