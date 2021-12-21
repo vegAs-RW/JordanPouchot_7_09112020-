@@ -43,3 +43,12 @@ Frontend :
 --> Executer npm run start
     --> Le frontend de l'application doit fonctionner sur localhost avec le port par defaut.
   
+
+Administrateur :
+-->email: admin@admin.fr
+-->Mdp: Admin123$
+
+Utilisateur : 
+-->email: user@mail.fr
+--> Mdp: User123$
+
