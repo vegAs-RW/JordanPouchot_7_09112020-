@@ -28,7 +28,7 @@ exports.likePost = (req, res, next) => {
                 userId: userId 
             })
             .then(response => {
-                console.log(postfound.likes);
+                //console.log(postfound.likes);
                 
                 db.Post.update({ 
                     likes: postfound.likes +1
@@ -75,7 +75,7 @@ exports.getAllLike = (req, res, next) => {
     .then(likePostFound => {
         if(likePostFound) {
             res.status(200).json(likePostFound);
-            console.log(likePostFound);
+            //console.log(likePostFound);
         } else {
             res.status(404).json({ error: 'Aucun like trouvé' });
         }
