@@ -2,9 +2,6 @@
 const jwt = require("jsonwebtoken");
 const db = require('../models/index');
 
-/*const Post = db.posts;
-const User = db.users;
-const Comment = db.comments;*/
 
 // Permet de créer un nouveau commentaire
 exports.createComment = (req, res, next) => {    

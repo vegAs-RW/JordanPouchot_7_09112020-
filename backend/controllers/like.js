@@ -2,9 +2,6 @@
 const jwt = require("jsonwebtoken");
 const db = require('../models/index');
 
-/*const Post = db.posts;
-const User = db.users;
-const Comment = db.comments;*/
 
 // Permet d'aimer un message
 exports.likePost = (req, res, next) => {
@@ -27,9 +24,7 @@ exports.likePost = (req, res, next) => {
                 postId: req.params.postId, 
                 userId: userId 
             })
-            .then(response => {
-                //console.log(postfound.likes);
-                
+            .then(response => { 
                 db.Post.update({ 
                     likes: postfound.likes +1
                 },{
@@ -75,7 +70,6 @@ exports.getAllLike = (req, res, next) => {
     .then(likePostFound => {
         if(likePostFound) {
             res.status(200).json(likePostFound);
-            //console.log(likePostFound);
         } else {
             res.status(404).json({ error: 'Aucun like trouvé' });
         }

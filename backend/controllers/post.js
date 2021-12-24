@@ -103,64 +103,8 @@ exports.modifyPost = (req, res, next) => {
 }
 
 
-// Permet de supprimer un message
-/*exports.deletePost = (req, res, next) => {
-    db.Post.findOne({
-        //attributes: ['id'],
-        where: { id: req.params.postId }
-    })
-    .then(post => {
-        if(post) { 
-            if(post.imagePost != null) {
-                const filename = post.imagePost.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    // On recupere les commentaires lié au post
-                    db.Comment.findAll({
-                        where: { PostId : req.params.postId} 
-                     })
-                     .then(() => {
-                         // On supprime les likes lié au post
-                        db.Like.destroy({
-                            where: { PostId: req.params.postId}
-                        })
-                        
-                        // On supprime les commentaires lié au post
-                        db.Comment.destroy({
-                            where: { PostId : req.params.postId} 
-                         })
-                     })
-                    // Et enfin on supprime le post
-                    db.Post.destroy({ 
-                        where: { id: req.params.postId } 
-                    })
-                    .then(() => res.status(200).json({ message: 'Votre message a été supprimé' }))
-                    .catch(() => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite ! 3' }));
-                })
-            } else {
-                db.Comment.destroy({
-                    where: { PostId : req.params.postId} 
-                 })
-                 db.Like.destroy({
-                    where: { PostId: req.params.postId}
-                })
-                db.Post.destroy({ 
-                    where: { id: req.params.postId } 
-                })
-                .then(() => res.status(200).json({ message: 'Votre message a été supprimé' }))
-                .catch(() => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
-            }
-        } else {
-            return res.status(404).json({ error: 'Message non trouvé'})
-        }
-    })
-    
-    .catch(error => res.status(500).json({ error: '⚠ Oops, une erreur s\'est produite !' }));
-}*/
-
-
 exports.deletePost = (req, res, next) => {
     db.Post.findOne({
-        //attributes: ['id'],
         where: { id: req.params.postId }
     })
     .then(post => {
