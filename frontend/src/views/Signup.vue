@@ -4,10 +4,6 @@
             <img class="home__title__logo" src="../assets/icon-left-font.png" alt="Logo de Groupomania">
         </div>
         <div class="home__display">
-            <!--<div class="home__display__picture">
-                <img class="home__display__picture" src="../assets/icon-left-font.png" alt="Représentation de trois personnes qui discutent via un chat">
-            </div>-->
-           
             <form @submit.prevent="signup" class="home__display__form">
                 <h1 class="home__display__form__title">S'inscrire</h1>
 
