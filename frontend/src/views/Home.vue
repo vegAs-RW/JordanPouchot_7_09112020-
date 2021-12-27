@@ -126,9 +126,9 @@
                     }
                 }
                 &__button {
-                    border: 3px solid #fc7c64;
+                    border: 3px solid #CF4A2A;
                     border-radius: 25px;
-                    background-color: #fc7c64;
+                    background-color: #CF4A2A;
                     color: #FFFF;
                     font-size: 15px;
                     font-weight: bold;

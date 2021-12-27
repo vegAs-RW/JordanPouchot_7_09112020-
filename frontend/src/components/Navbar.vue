@@ -1,5 +1,5 @@
 <template>  
-    <div id="app">
+    <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-light nav">
             <img class="nav__logo" src="../assets/icon-left-font.png" alt="Logo de Groupomania">
 

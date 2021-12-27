@@ -15,7 +15,7 @@
                     <textarea v-model="content" class="newPost__content__text" name="message" id="message" placeholder="Quoi de neuf ?" aria-label="Rédiger un nouveau message"/>    
                     
                     <div id="preview" style="display:block">
-                        <img v-if="imagePreview" :src="imagePreview" id="preview" style="display:block" class="newPost__content__image" alt="Prévisualisation de l'image ajoutée au message"/>
+                        <img v-if="imagePreview" :src="imagePreview" id="preview" style="display:block" class="newPost__content__image" alt="Prévisualisation de l'image ajoutée"/>
                     </div>        
                 </div>
 
@@ -47,7 +47,7 @@
                     <p :contentPostId="post.id" style="display:block" class="displayPost__item__publication__text">{{ post.content }}</p>
 
                     <div :inputId="post.id" style="display:none" v-bind:showInputModify="showInputModify" class="displayPost__item__publication__text__modifyText">
-                        <textarea v-model="contentmodifyPost" :placeholder="post.content" id="textarea" class="displayPost__item__publication__text__modifyText__textarea" aria-label="Modifier le message"/>
+                        <textarea v-model="contentmodifyPost" :placeholder="post.content"  class="displayPost__item__publication__text__modifyText__textarea" aria-label="Modifier le message"/>
                         
                         <div class="displayPost__item__publication__text__modifyText__option">
                             <div class="displayPost__item__publication__text__modifyText__option__file">
@@ -108,7 +108,7 @@
 
                 <div :formId="post.id" style="display:none" v-bind:showCreateComment="showCreateComment" class="displayComment__newComment">
                     <form @submit.prevent="createComment(post.id)" class="displayComment__newComment__form">
-                        <textarea v-model="contentComment" class="displayComment__newComment__form__text" name="comment" id="comment" placeholder="Ecrivez votre commentaire ..." aria-label="Rédiger un nouveau commentaire"/>              
+                        <textarea v-model="contentComment" class="displayComment__newComment__form__text" name="comment"  placeholder="Ecrivez votre commentaire ..." aria-label="Rédiger un nouveau commentaire"/>              
                         
                         <div>
                             <button class="displayComment__newComment__form__button" aria-label="Publier le commentaire"><i class="far fa-paper-plane"></i></button>
@@ -218,7 +218,7 @@
                 })
                 
                 .then(response => {
-                    console.log(response);
+                    //console.log(response);
                     this.posts = response.data;
     
                 })
@@ -427,19 +427,19 @@
                 &__btnInvisible {
                     display: flex;
                     align-items: center;
-                    color: #fc7c64;
+                    color: #FFFF;
                     border: none;
-                    background-color: #fcb49d;
+                    background-color: #CF4A2A;
                     &:hover, &:focus {
                         color: white;
                     }
                 }
             }
             &__button {
-                background-color: #fcb49d;
+                background-color: #CF4A2A;
                 border: none;
                 border-radius: 25px;
-                color: /*#3f3d56*/ #fc7c64;
+                color: #FFFF;
                 font-size: 15px;
                 font-weight: bold;
                 padding: 0.4rem;
@@ -491,7 +491,7 @@
                     margin: 0.5rem 0.5rem 0 0;
                     }
                     &__name {
-                        color: #fc8c74;
+                        color: #D24634;
                         font-weight: bold;
                         margin-bottom: 0.2rem;
                         font-size: 22px;
